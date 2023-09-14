@@ -9,6 +9,8 @@ const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 
 const webpack = require('webpack-stream');
+const babel = require('gulp-babel');
+
 
 // В данном таске нужно проверить, существует ли вообще папка build для исключения возникновения ошибок
 // done нужен, чтобы дать галпу понять, что таск завершен
@@ -73,6 +75,7 @@ gulp.task('js', function () {
   return gulp
     .src('./src/js/*.js')
     .pipe(plumber(configureNotify('JS')))
+    .pipe(babel())
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest('./build/js/'))
 })
@@ -93,7 +96,7 @@ gulp.task('watch', function () {
   gulp.watch('./src/**/*.html', gulp.parallel('html'));
   gulp.watch('./src/img/**/*', gulp.parallel('images'));
   gulp.watch('./src/vendor/fonts/**/*', gulp.parallel('fonts'));
-  gulp.watch('./src/js/**/*.js', gulp.parallel('js'));
+  gulp.watch('./src/js/*.js', gulp.parallel('js'));
 });
 
 // Запуск проекта

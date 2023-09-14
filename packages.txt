@@ -18,7 +18,7 @@ gulp-group-css-media-queries - Группировка CSS медиа запро�
 Сборка скриптов. webpack, babel
 
 Установка babel:
-npm i gulp-babel @babel/core @babel/preset-env
+npm i gulp-babel @babel/core @babel/preset-env --save-dev
 
 - JS таск
 - Настройки package-json
