@@ -9,6 +9,7 @@
   "author": "Artem Stankevich",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^6.8.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-file-include": "^2.3.0",
@@ -18,6 +19,8 @@
     "gulp-sass": "^5.1.0",
     "gulp-server-livereload": "^1.9.2",
     "gulp-sourcemaps": "^3.0.0",
-    "sass": "^1.67.0"
+    "sass": "^1.67.0",
+    "style-loader": "^3.3.3",
+    "webpack-stream": "^7.0.0"
   }
 }
