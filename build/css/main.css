@@ -1,0 +1,11 @@
+.page {
+  min-height: 100vh;
+}
+
+.header {
+  background-color: aqua;
+  height: 200px;
+  font-size: 24px;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJhc2UvX3BhZ2Uuc2NzcyIsImJsb2Nrcy9fZm9vdGVyLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTs7O0FDREY7RUFDRTtFQUNBIiwiZmlsZSI6Im1haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2Uge1xuICBtaW4taGVpZ2h0OiAxMDB2aDtcbn0iLCIuaGVhZGVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogYXF1YTtcbiAgZm9udC1zaXplOiAyNHB4O1xufSJdfQ== */
