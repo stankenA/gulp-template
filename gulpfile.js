@@ -1,15 +1,21 @@
 const gulp = require('gulp');
 const fileInclude = require('gulp-file-include');
 const sass = require('gulp-sass')(require('sass'));
+const sassGlob = require('gulp-sass-glob');
+
 const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
 const fs = require('fs');
 const sourceMaps = require('gulp-sourcemaps');
+
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
+
+const imagemin = require('gulp-imagemin');
+const changed = require('gulp-changed');
 
 
 // В данном таске нужно проверить, существует ли вообще папка build для исключения возникновения ошибок
@@ -37,7 +43,8 @@ const configureNotify = (title) => {
 // Включение html файлов друг в друга
 gulp.task('html', function () {
   return gulp
-    .src('./src/*.html')
+    .src(['./src/*.html', '!./src/blocks/*.html']) // ! - значит включать не нужно
+    .pipe(changed('./build/'))
     .pipe(plumber(configureNotify('HTML')))
     .pipe(fileInclude({
       prefix: '@@',
@@ -50,8 +57,10 @@ gulp.task('html', function () {
 gulp.task('sass', function () {
   return gulp
     .src('./src/scss/*.scss')
+    .pipe(changed('./build/css/'))
     .pipe(plumber(configureNotify('SCSS')))
     .pipe(sourceMaps.init())
+    .pipe(sassGlob())
     .pipe(sass())
     .pipe(sourceMaps.write())
     .pipe(gulp.dest('./build/css'))
@@ -61,6 +70,8 @@ gulp.task('sass', function () {
 gulp.task('images', function () {
   return gulp
     .src('./src/images/**/*')
+    .pipe(changed('./build/img/'))
+    .pipe(imagemin({ verbose: true }))
     .pipe(gulp.dest('./build/img/'))
 });
 
@@ -68,12 +79,14 @@ gulp.task('images', function () {
 gulp.task('fonts', function () {
   return gulp
     .src('./src/vendor/fonts/**/*')
+    .pipe(changed('./build/fonts/'))
     .pipe(gulp.dest('./build/fonts/'))
 });
 
 gulp.task('js', function () {
   return gulp
     .src('./src/js/*.js')
+    .pipe(changed('./build/js/'))
     .pipe(plumber(configureNotify('JS')))
     .pipe(babel())
     .pipe(webpack(require('./webpack.config.js')))

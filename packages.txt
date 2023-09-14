@@ -30,26 +30,10 @@ npm i webpack-stream style-loader css-loader --save-dev
 
 - JS таск
 - webpack конфиг
-- пример файлов с модулями
-
-Пример с datepicker:
-npm i air-datepicker -S
-
-
-JS:
-import AirDatepicker from 'air-datepicker';
-import 'air-datepicker/air-datepicker.css';
-
-document.addEventListener('DOMContentLoaded', () => {
-	new AirDatepicker('#my-element');
-});
-
-HTML:
-<input type="text" id="my-element">
 
 ----------------------------------------------------------------------
 
-Картинки:
+Сжатие изображений:
 npm i gulp-imagemin@7 --save-dev
 
 .pipe(imagemin({ verbose: true }))
@@ -57,15 +41,20 @@ npm i gulp-imagemin@7 --save-dev
 
 ----------------------------------------------------------------------
 
-Ускорение сборки
+Ускорение сборки:
 
-npm install --save-dev gulp-changed
+npm install gulp-changed --save-dev
 
 - использование в картинках, HTML, JS, CSS
 
 
 ----------------------------------------------------------------------
 
+Автоматическое подключение SCSS:
+
+npm i gulp-sass-glob --save-dev
+
+----------------------------------------------------------------------
 
 web-p
 
