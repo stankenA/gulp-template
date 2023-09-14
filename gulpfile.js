@@ -5,6 +5,8 @@ const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
 const fs = require('fs');
 const sourceMaps = require('gulp-sourcemaps');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
 
 // В данном таске нужно проверить, существует ли вообще папка build для исключения возникновения ошибок
 // done нужен, чтобы дать галпу понять, что таск завершен
@@ -18,10 +20,21 @@ gulp.task('clean', function (done) {
   done();
 });
 
+const configureNotify = (title) => {
+  return {
+    errorHandler: notify.onError({
+      title: `${title}`,
+      message: 'Error <%= error.message %>',
+      sound: false
+    })
+  }
+}
+
 // Включение html файлов друг в друга
 gulp.task('html', function () {
   return gulp
     .src('./src/*.html')
+    .pipe(plumber(configureNotify('HTML')))
     .pipe(fileInclude({
       prefix: '@@',
       basepath: '@file'
@@ -29,10 +42,11 @@ gulp.task('html', function () {
     .pipe(gulp.dest('./build/'))
 });
 
-// Компиляций sass
+// Компиляция sass
 gulp.task('sass', function () {
   return gulp
     .src('./src/scss/*.scss')
+    .pipe(plumber(configureNotify('SCSS')))
     .pipe(sourceMaps.init())
     .pipe(sass())
     .pipe(sourceMaps.write())
@@ -43,7 +57,14 @@ gulp.task('sass', function () {
 gulp.task('images', function () {
   return gulp
     .src('./src/images/**/*')
-    .pipe(gulp.dest('./build/img'))
+    .pipe(gulp.dest('./build/img/'))
+});
+
+// Копирование шрифтов в билд
+gulp.task('fonts', function () {
+  return gulp
+    .src('./src/vendor/fonts/**/*')
+    .pipe(gulp.dest('./build/fonts/'))
 });
 
 // Запуск сервера
@@ -61,11 +82,12 @@ gulp.task('watch', function () {
   gulp.watch('./src/scss/**/*.scss', gulp.parallel('sass'));
   gulp.watch('./src/**/*.html', gulp.parallel('html'));
   gulp.watch('./src/img/**/*', gulp.parallel('images'));
+  gulp.watch('./src/vendor/fonts/**/*', gulp.parallel('fonts'));
 });
 
 // Запуск проекта
 gulp.task('default', gulp.series(
   'clean',
-  gulp.parallel('html', 'sass', 'images'),
+  gulp.parallel('html', 'sass', 'images', 'fonts'),
   gulp.parallel('server', 'watch')
 ));
