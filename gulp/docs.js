@@ -6,9 +6,9 @@ const webpHTML = require('gulp-webp-html');
 
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
+const sourceMaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
-const sourceMaps = require('gulp-sourcemaps');
 const groupMedia = require('gulp-group-css-media-queries');
 const wepbCSS = require('gulp-webp-css');
 
