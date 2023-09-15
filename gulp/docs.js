@@ -2,6 +2,7 @@ const gulp = require('gulp');
 
 const fileInclude = require('gulp-file-include');
 const htmlClean = require('gulp-htmlclean');
+const webpHTML = require('gulp-webp-html');
 
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
@@ -9,6 +10,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
 const sourceMaps = require('gulp-sourcemaps');
 const groupMedia = require('gulp-group-css-media-queries');
+const wepbCSS = require('gulp-webp-css');
 
 const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
@@ -51,12 +53,13 @@ const configureNotify = (title) => {
 gulp.task('html:docs', function () {
   return gulp
     .src(['./src/*.html', '!./src/blocks/*.html']) // ! - значит включать не нужно
-    .pipe(changed('./docs/'))
+    .pipe(changed('./docs/', { hasChanged: changed.compareContents }))
     .pipe(plumber(configureNotify('HTML')))
     .pipe(fileInclude({
       prefix: '@@',
       basepath: '@file'
     }))
+    .pipe(webpHTML())
     .pipe(htmlClean())
     .pipe(gulp.dest('./docs/'))
 });
@@ -72,6 +75,7 @@ gulp.task('sass:docs', function () {
     .pipe(sassGlob())
     .pipe(groupMedia())
     .pipe(sass())
+    .pipe(wepbCSS())
     .pipe(csso())
     .pipe(sourceMaps.write())
     .pipe(gulp.dest('./docs/css'))
@@ -84,7 +88,6 @@ gulp.task('images:docs', function () {
     .pipe(changed('./docs/img/'))
     .pipe(webp())
     .pipe(gulp.dest('./docs/img/'))
-
     .pipe(gulp.src('./src/img/**/*'))
     .pipe(changed('./docs/img/'))
     .pipe(imagemin({ verbose: true }))

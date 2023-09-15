@@ -46,7 +46,7 @@ const configureNotify = (title) => {
 gulp.task('html:dev', function () {
   return gulp
     .src(['./src/*.html', '!./src/blocks/*.html']) // ! - значит включать не нужно
-    .pipe(changed('./build/'))
+    .pipe(changed('./docs/', { hasChanged: changed.compareContents }))
     .pipe(plumber(configureNotify('HTML')))
     .pipe(fileInclude({
       prefix: '@@',

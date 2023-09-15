@@ -3,7 +3,7 @@ const gulp = require('gulp');
 require('./gulp/dev.js');
 require('./gulp/docs.js');
 
-// Запуск проекта
+// Запуск проекта в режим разработки
 gulp.task('default', gulp.series(
   'clean:dev',
   gulp.parallel('html:dev', 'sass:dev', 'js:dev', 'images:dev', 'fonts:dev'),
