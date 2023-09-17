@@ -75,8 +75,8 @@ gulp.task('sass:docs', function () {
     .pipe(sassGlob())
     .pipe(groupMedia())
     .pipe(sass())
-    .pipe(wepbCSS())
     .pipe(csso())
+    .pipe(wepbCSS())
     .pipe(sourceMaps.write())
     .pipe(gulp.dest('./docs/css'))
 });
@@ -84,14 +84,14 @@ gulp.task('sass:docs', function () {
 // Копирование изображений в билд
 gulp.task('images:docs', function () {
   return gulp
-    .src('./src/img/**/*')
+    .src('./src/assets/img/**/*')
     .pipe(changed('./docs/img/'))
     .pipe(webp())
-    .pipe(gulp.dest('./docs/img/'))
-    .pipe(gulp.src('./src/img/**/*'))
-    .pipe(changed('./docs/img/'))
+    .pipe(gulp.dest('./docs/assets/img/'))
+    .pipe(gulp.src('./src/assets/img/**/*'))
+    .pipe(changed('./docs/assets/img/'))
     .pipe(imagemin({ verbose: true }))
-    .pipe(gulp.dest('./docs/img/'))
+    .pipe(gulp.dest('./docs/assets/img/'))
 });
 
 // Копирование шрифтов в билд

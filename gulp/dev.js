@@ -71,11 +71,11 @@ gulp.task('sass:dev', function () {
 // Копирование изображений в билд
 gulp.task('images:dev', function () {
   return gulp
-    .src('./src/img/**/*')
-    .pipe(changed('./build/img/'))
+    .src('./src/assets/img/**/*')
+    .pipe(changed('./build/assets/img/'))
     .pipe(plumber(configureNotify('images')))
     .pipe(imagemin())
-    .pipe(gulp.dest('./build/img/'))
+    .pipe(gulp.dest('./build/assets/img/'))
 });
 
 // Копирование шрифтов в билд
