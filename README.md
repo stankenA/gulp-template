@@ -41,8 +41,54 @@ Gulp — ваш бро, не сомневайтесь.
 - `csso` - минификация CSS файлов
 - `group-css-media-qureies` - группировка медиа-запросов в CSS файлах
 
-## Описание
+## Структура проекта
 
+```
+|- .gitignore
+|- .editorconfig
+|- gulp
+|   |- dev.js // описание тасков для работы в режиме разработки
+|   |- docs.js // описание таксков для продакшн сборки
+|- gulpfile.js
+|- package.json
+|- package-lock.json
+|- packages.txt // описание npm пакетов проекта
+|- webpack.config.js // описание конфигурации для работы Webpack
+|- src
+|   |- index.html
+|   |- contacts.html
+|   |- assets // папка с ассетами
+|       |- img
+|       |- video
+|       |- другие ассеты
+|   |- blocks // папка с html компонентами
+|       |- header.html
+|       |- footer.html
+|       |- другие компоненты
+|   |- js // папка для скриптов (для каждой страницы)
+|       |- index.js
+|       |- contacts.js
+|       |- components // папка для js компонентов (модулей)
+|             |- hello.js
+|       |- другие скрипты
+|   |- scss // папка для scss стилей
+|       |- base // папка с общими и утилитарными стилями для всех страниц
+|             |- _fonts.scss
+|             |- _mixins.scss
+|             |- _normalize.scss
+|             |- _page.scss
+|             |- _vars.scss
+|       |- blocks // папка для блоков стилей
+|             |- _footer.scss
+|             |- _header.scss
+|       |- main.scss
+|       |- contacts.scss
+|   |- vendor // папка для сторонних файлов
+|       |- fonts // папка с шрифтами
 
+> Данные папки собираются в процессе разработки/продакшена соответственно
+|- build 
+|- docs 
+```
 
 
